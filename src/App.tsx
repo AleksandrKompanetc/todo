@@ -1,12 +1,62 @@
+import { useState, useEffect } from 'react'
+import { Plus } from 'lucide-react'
 import './App.css'
 
-function App() {
+interface Todo {
+    id: number
+    text: string
+    completed: boolean
+  }
 
-    return (
-      <div className='container'>
-        <h1>Todo App</h1>
+function App() {
+  const [todos, setTodos] = useState<Todo[]>([])
+  const [inputValue, setInputValue] = useState('')
+  const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all')
+
+  return (
+    <div className='min-h-screen bg-gray-100 py-8 px-4'>
+      <div className='max-w-xl mx-auto'>
+        <h1 className='text-4xl font-bold text-center mb-8 text-gray-800'>Todo App</h1>
+
+        <form className='mb-8 flex gap-2'>
+          <input 
+            type="text" 
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder='New task...'
+            className='flex-1 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-blue-500 text-lg'
+            />
+          <button
+            type="submit"
+            className='bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl fond-medium flex items-center gap-2 transition'
+          >
+            <Plus size={24} />
+            Add Todo
+          </button>
+        </form>
+
+        <div className='flex gap-2 mb-6'>
+          {(['all', 'active', 'completed'] as const).map((f) => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={`px-5 py-2 rounded-xl font-medium transition ${
+                filter === f
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-600 hover:bg-gray-100'
+              }`}
+              >
+                {f === 'all' && 'All'}
+                {f === 'active' && 'Active'}
+                {f === 'completed' && 'Completed'}
+              </button>
+          ))}
+        </div>
+
+        
       </div>
-    )
+    </div>
+  )
 }
 
 export default App

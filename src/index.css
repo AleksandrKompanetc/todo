@@ -1,3 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  /* сюда можно добавлять свои кастомные цвета, шрифты и т.д. */
+}
