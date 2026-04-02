@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Plus } from 'lucide-react'
+import { Plus, CheckCircle, Circle, Trash2 } from 'lucide-react'
 import './App.css'
 
 interface Todo {
@@ -53,7 +53,47 @@ function App() {
           ))}
         </div>
 
-        
+        <div>
+          {filteredTodos.length === 0 ? (
+            <p className='text-center py-12 text-gray-500'>
+              {filter === 'completed' ? 'No completed tasks yet!' : 'No tasks yet!'}
+            </p>
+          ) : (
+            <ul>
+              {filteredTodos.map((todo) => (
+                <li 
+                  key={todo.id}
+                  className='border-b last:border-none flex items-center gap-3 px-5 py-4 hover:bg-gray-50 transition'
+                >
+                  <button
+                    onClick={() => toggleTodo(todo.id)}
+                    className='text-gray-400 hover:text-gray-500 transition'
+                  >
+                    {todo.completed ? (
+                      <CheckCircle size={26} className='text-green-500' />
+                    ) : (
+                      <Circle size={26} />
+                    )}
+                  </button>
+                  <span className={`flex-1 text-lg ${
+                    todo.completed
+                    ? 'line-through text-gray-400'
+                    : 'text-gray-700'
+                  }`}
+                  >
+                    {todo.text}
+                  </span>
+                  <button
+                    onClick={() => deleteTodo(todo.id)}
+                    className='text-gray-400 hover:text-gray-500 transition p-2'
+                  >
+                    <Trash2 size={20} />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
     </div>
   )
