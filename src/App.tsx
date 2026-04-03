@@ -13,6 +13,13 @@ function App() {
   const [inputValue, setInputValue] = useState('')
   const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all')
 
+  useEffect(() => {
+    const savedTodos = localStorage.getItem('todos')
+    if (savedTodos) {
+      setTodos(JSON.parse(savedTodos))
+    }
+  }, [])
+
   return (
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
       <div className='max-w-xl mx-auto'>
