@@ -24,12 +24,25 @@ function App() {
     localStorage.setItem('todos', JSON.stringify(todos))
   }, [todos])
 
+  const addTodo = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!inputValue.trim()) return
+
+    const newTodo: Todo = {
+      id: Date.now(),
+      text: inputValue.trim(),
+      completed: false
+    }
+    setTodos([...todos, newTodo])
+    setInputValue('')
+  }
+
   return (
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
       <div className='max-w-xl mx-auto'>
         <h1 className='text-4xl font-bold text-center mb-8 text-gray-800'>Todo App</h1>
 
-        <form className='mb-8 flex gap-2'>
+        <form onSubmit={addTodo} className='mb-8 flex gap-2'>
           <input 
             type="text" 
             value={inputValue}
