@@ -94,6 +94,11 @@ function App() {
             </ul>
           )}
         </div>
+        {todos.length > 0 && (
+          <p className='text-center mt-6 text-gray-500'>
+            Count: <span className='font-semibold text-gray-700'>{activeCount}</span>
+          </p>
+        )}
       </div>
     </div>
   )
