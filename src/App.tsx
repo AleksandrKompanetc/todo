@@ -37,6 +37,12 @@ function App() {
     setInputValue('')
   }
 
+  const toggleTodo = (id: number) => {
+    setTodos(todos.map(todo => 
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo 
+    ))
+  }
+
   return (
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
       <div className='max-w-xl mx-auto'>
