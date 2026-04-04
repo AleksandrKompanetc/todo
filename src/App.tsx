@@ -135,7 +135,7 @@ function App() {
         </div>
         {todos.length > 0 && (
           <p className='text-center mt-6 text-gray-500'>
-            Count: <span className='font-semibold text-gray-700'>{activeCount}</span>
+            Count: <span className='font-semibold text-gray-700'>{filteredTodos.length}</span>
           </p>
         )}
       </div>
