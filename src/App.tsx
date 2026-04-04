@@ -47,6 +47,11 @@ function App() {
     setTodos(todos.filter(todo => todo.id !== id))
   }
 
+  const filteredTodos = todos.filter(todo => {
+    if (filter === 'active') return !todo.completed
+    if (filter === 'completed') return todo.completed
+    return true
+  })
   return (
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
       <div className='max-w-xl mx-auto'>
