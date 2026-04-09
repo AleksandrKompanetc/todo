@@ -36,9 +36,13 @@ function App() {
     return true
   })
 
+  const activeCount = todos.filter(todo => !todo.completed).length
+
   return (
-    <div>
-      
+    <div className='min-h-screen bg-gray-100 py-8 px-4'>
+      <div className='max-w-xl mx-auto'>
+        <h1>Todo App</h1>
+      </div>
     </div>
   )
 }
