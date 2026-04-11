@@ -5,9 +5,13 @@ interface TodoItemProps {
   todo: Todo
   onToggle: (id: number) => void
   onDelete: (id: number) => void
+  onEdit: (id: number, newText: string) => void
 }
 
-export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
+export default function TodoItem({ todo, onToggle, onDelete, onEdit }: TodoItemProps) {
+  const [isEditing, setIsEditing] = useState(false)
+  const [editValue, setEditValue] = useState(todo.text)
+
   return (
     <li className='border-b last:border-none flex items-center gap-3 px-5 py-4 hover:bg-gray-50 transition'> 
       <button
