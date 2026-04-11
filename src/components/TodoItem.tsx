@@ -1,5 +1,5 @@
 import { Trash2, CheckCircle, Circle } from 'lucide-react'
-import { Todo } from '../types'
+import type { Todo } from '../types'
 
 interface TodoItemProps {
   todo: Todo
@@ -15,7 +15,7 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
         className='text-gray-400 hover:text-green-500 transition'
       >
         {todo.completed ? (
-          <CheckCircle size={26} className='text-green-500'
+          <CheckCircle size={26} className='text-green-500' />
         ) : (
           <Circle size={26} />
         )}
