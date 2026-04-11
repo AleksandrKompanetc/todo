@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react'
-import { Todo, Filter } from '../types'
+import TodoForm from './TodoForm'
+import TodoList from './TodoList'
+import Filters from './Filters'
+import TodoStats from './TodoStats'
+import type { Todo, Filter } from '../types'
 
 
 function App() {
@@ -22,12 +26,13 @@ function App() {
   }
 
   const toggleTodo = (id: number) => {
-    setTodos(todos.map(todo) => 
+    setTodos(todos.map(todo =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo)
+    )
   }
 
   const deleteTodo = (id: number) => {
-    setTodos(todos.filter(todo => todo.id !== id)
+    setTodos(todos.filter(todo => todo.id !== id))
   }
 
   const filteredTodos = todos.filter(todo => {
@@ -41,7 +46,16 @@ function App() {
   return (
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
       <div className='max-w-xl mx-auto'>
-        <h1>Todo App</h1>
+        <h1 className='text-4xl font-bold text-center mb-8 text-gray-800'>Todo App</h1>
+
+        <TodoForm onAdd={addTodo} />
+        <Filters currentFilter={filter} onFilterChange={setFilter} />
+        <TodoList
+          todos={filteredTodos}
+          onToggle={toggleTodo}
+          onDelete={deleteTodo}
+        />
+        {todos.length > 0 && <TodoStats activeCount={activeCount} />}
       </div>
     </div>
   )
