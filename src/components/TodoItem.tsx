@@ -13,7 +13,25 @@ export default function TodoItem({ todo, onToggle, onDelete, onEdit }: TodoItemP
   const [isEditing, setIsEditing] = useState(false)
   const [editValue, setEditValue] = useState(todo.text)
 
-  
+  const handleSave = () => {
+    if (editValue.trim() && editValue !== todo.text) {
+      onEdit(todo.id, editValue.trim())
+    }
+    setIsEditing(false)
+  }
+
+  const handleCancel = () => {
+    setEditValue(todo.text)
+    setIsEditing(false)
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSave()
+    } else if (e.key ==='Escape') {
+      handleCancel()
+    }
+  }
 
   return (
     <li className='border-b last:border-none flex items-center gap-3 px-5 py-4 hover:bg-gray-50 transition'> 
