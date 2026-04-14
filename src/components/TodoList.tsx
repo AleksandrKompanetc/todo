@@ -5,14 +5,15 @@ interface TodoListProps {
   todos: Todo[]
   onToggle: (id: number) => void
   onDelete: (id: number) => void
+  onEdit: (id: number, newText: string) => void
 }
 
-export default function TodoList({ todos,onToggle, onDelete }: TodoListProps) {
+export default function TodoList({ todos, onToggle, onDelete, onEdit }: TodoListProps) {
   if (todos.length === 0) {
     return (
       <div className='bg-white rounded-2xl shadow-sm py-12'>
         <p className='text-center text-gray-500 text-lg'>
-          No tasks yet! Add some tasks to get started.
+          {todos.length === 0 ? 'No todos yet!' : 'All caught up!'}
         </p>
       </div>
     )
@@ -26,6 +27,7 @@ export default function TodoList({ todos,onToggle, onDelete }: TodoListProps) {
             todo={todo}
             onToggle={onToggle}
             onDelete={onDelete}
+            onEdit={onEdit}
           />
         ))}
       </ul>
