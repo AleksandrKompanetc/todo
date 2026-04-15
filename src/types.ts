@@ -5,3 +5,4 @@ export interface Todo {
 }
 
 export type Filter = 'all' | 'active' | 'completed'
+export type Theme = 'light' | 'dark'

@@ -1,5 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import "tailwindcss";
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.dark {
+  color-scheme: dark;
+}
 
 @theme {
   /* сюда можно добавлять свои кастомные цвета, шрифты и т.д. */
 }
+

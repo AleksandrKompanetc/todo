@@ -58,6 +58,7 @@ export default function App() {
           todos={filteredTodos}
           onToggle={toggleTodo}
           onDelete={deleteTodo}
+          onEdit={editTodo}
         />
         {todos.length > 0 && <TodoStats activeCount={activeCount} />}
       </div>
