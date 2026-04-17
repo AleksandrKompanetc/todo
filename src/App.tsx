@@ -9,6 +9,10 @@ import type { Todo, Filter } from './types'
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
   const [filter, setFilter] = useState<Filter>('all')
+  const [isDark, setIsDark] = useState(() => {
+    if (localStorage.theme === 'datk') || 
+      (!('theme' in localStorage) && window.matchMedia('(prefers-color-sceme: dark'))
+  })
 
   useEffect(() => {
     const savedTodos = localStorage.getItem('todos')
