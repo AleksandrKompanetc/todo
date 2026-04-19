@@ -4,13 +4,13 @@ import TodoList from './components/TodoList'
 import Filters from './components/Filters'
 import TodoStats from './components/TodoStats'
 import ThemeToggle from './components/ThemeToggle'
-import type { Todo, Filter } from './types'
+import type { Todo, Filter, Theme } from './types'
 
 
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
   const [filter, setFilter] = useState<Filter>('all')
-  const [isDark, setIsDark] = useState(false)
+  const [theme, setTheme] = useState<Theme>('light')
 
   useEffect(() => {
     const savedTodos = localStorage.getItem('todos')
@@ -18,22 +18,23 @@ export default function App() {
       setTodos(JSON.parse(savedTodos))
     }
 
-    const savedTheme = localStorage.getItem('theme')
+    const savedTheme = localStorage.getItem('theme') as Theme | null
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
 
-    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark)
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light')
 
-    setIsDark(shouldBeDark)
-    if (shouldBeDark) {
-      document.documentElement.classList.toggle('dark', shouldBeDark)
+    setTheme(initialTheme)
+    if (initialTheme === 'dark') {
+      document.documentElement.classList.add('dark')
     }
-  })
+  }, [])
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos))
   }, [todos])
 
   const addTodo = (text: string) => {
+
     setTodos([...todos, { id: Date.now(), text, completed: false }])
   }
 
