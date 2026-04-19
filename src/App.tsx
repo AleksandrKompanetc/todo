@@ -3,6 +3,7 @@ import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
 import Filters from './components/Filters'
 import TodoStats from './components/TodoStats'
+import ThemeToggle from './components/ThemeToggle'
 import type { Todo, Filter } from './types'
 
 
@@ -15,6 +16,16 @@ export default function App() {
     const savedTodos = localStorage.getItem('todos')
     if (savedTodos) {
       setTodos(JSON.parse(savedTodos))
+    }
+
+    const savedTheme = localStorage.getItem('theme')
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark)
+
+    setIsDark(shouldBeDark)
+    if (shouldBeDark) {
+      document.documentElement.classList.toggle('dark', shouldBeDark)
     }
   })
 
@@ -53,10 +64,24 @@ export default function App() {
   const activeCount = todos.filter(todo => !todo.completed).length
   const completedCount = todos.length - activeCount
 
+  const toggleTheme = () => {
+    const newIsDark = !isDark
+    setIsDark(newIsDark)
+
+    if (newIsDark) {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('theme', 'light')
+    }
+  }
+
   return (
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
       <div className='max-w-xl mx-auto'>
         <h1 className='text-4xl font-bold text-center mb-8 text-gray-800'>Todo App</h1>
+        <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
 
         <TodoForm onAdd={addTodo} />
         <Filters currentFilter={filter} onFilterChange={setFilter} />
