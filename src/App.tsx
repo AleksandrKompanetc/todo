@@ -34,13 +34,22 @@ export default function App() {
   }, [todos])
 
   const addTodo = (text: string) => {
-
-    setTodos([...todos, { id: Date.now(), text, completed: false }])
+    if (!text.trim()) return
+    setTodos(prev => [
+      ...prev,
+      {
+        id: Date.now(),
+        text: text.trim(),
+        completed: false
+      }
+    ])
   }
 
   const toggleTodo = (id: number) => {
-    setTodos(todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo)
+    setTodos(prev => 
+      prev.map(todo => 
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
     )
   }
 
