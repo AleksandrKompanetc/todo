@@ -9,10 +9,7 @@ import type { Todo, Filter } from './types'
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
   const [filter, setFilter] = useState<Filter>('all')
-  const [isDark, setIsDark] = useState(() => {
-    if (localStorage.theme === 'datk') || 
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-sceme: dark'))
-  })
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
     const savedTodos = localStorage.getItem('todos')
@@ -26,7 +23,7 @@ export default function App() {
   }, [todos])
 
   const addTodo = (text: string) => {
-    setTodos([...todos, { id: Date.now(), text, completed: false}])
+    setTodos([...todos, { id: Date.now(), text, completed: false }])
   }
 
   const toggleTodo = (id: number) => {
@@ -40,7 +37,11 @@ export default function App() {
   }
 
   const editTodo = (id: number, newText: string) => {
-    setTodos(todos.map(todo => todo.id === id ? { ...todo, text: newText } : todo ))
+    setTodos(todos.map(todo => todo.id === id ? { ...todo, text: newText } : todo))
+  }
+
+  const clearCompleted = () => {
+    setTodos(prev => prev.filter(todo => !todo.completed))
   }
 
   const filteredTodos = todos.filter(todo => {
@@ -50,6 +51,7 @@ export default function App() {
   })
 
   const activeCount = todos.filter(todo => !todo.completed).length
+  const completedCount = todos.length - activeCount
 
   return (
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
@@ -64,7 +66,13 @@ export default function App() {
           onDelete={deleteTodo}
           onEdit={editTodo}
         />
-        {todos.length > 0 && <TodoStats activeCount={activeCount} />}
+        {todos.length > 0 && (
+          <TodoStats
+            activeCount={activeCount}
+            completedCount={completedCount}
+            onClearCompleted={clearCompleted}
+          />
+        )}
       </div>
     </div>
   )
