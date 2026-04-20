@@ -10,7 +10,7 @@ import type { Todo, Filter, Theme } from './types'
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
   const [filter, setFilter] = useState<Filter>('all')
-  const [theme, setTheme] = useState<Theme>('light')
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
     const savedTodos = localStorage.getItem('todos')
@@ -21,10 +21,10 @@ export default function App() {
     const savedTheme = localStorage.getItem('theme') as Theme | null
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
 
-    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light')
+    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark)
 
-    setTheme(initialTheme)
-    if (initialTheme === 'dark') {
+    setIsDark(shouldBeDark)
+    if (shouldBeDark) {
       document.documentElement.classList.add('dark')
     }
   }, [])
@@ -54,11 +54,16 @@ export default function App() {
   }
 
   const deleteTodo = (id: number) => {
-    setTodos(todos.filter(todo => todo.id !== id))
+    setTodos(prev => prev.filter(todo => todo.id !== id)) 
   }
 
   const editTodo = (id: number, newText: string) => {
-    setTodos(todos.map(todo => todo.id === id ? { ...todo, text: newText } : todo))
+    if (!newText.trim()) return
+    setTodos(prev => 
+      prev.map(todo => 
+        todo.id === id ? { ...todo, text: newText.trim() } : todo
+      )
+    )
   }
 
   const clearCompleted = () => {
@@ -91,7 +96,7 @@ export default function App() {
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
       <div className='max-w-xl mx-auto'>
         <h1 className='text-4xl font-bold text-center mb-8 text-gray-800'>Todo App</h1>
-        <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
+        <ThemeToggle theme={isDark ? 'dark' : 'light'} onToggle={toggleTheme} />
 
         <TodoForm onAdd={addTodo} />
         <Filters currentFilter={filter} onFilterChange={setFilter} />
