@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Circle, CheckCircle } from 'lucide-react'
+import TodoList from './components/TodoList'
 
 interface Todo {
   id: number
@@ -32,7 +33,7 @@ export default function App() {
 
   const editTodo = (id: number) => {
     if (!editValue.trim()) return
-    setTodos(prev => prev.map(todo => 
+    setTodos(prev => prev.map(todo =>
       todo.id === id ? { ...todo, text: editValue.trim() } : todo
     ))
   }
@@ -40,94 +41,37 @@ export default function App() {
   const handleSave = (id: number) => {
     if (editValue.trim()) {
       editTodo(id)
-    setIsEditing(false)
-  }
+      setIsEditing(false)
+    }
 
-  const handleCancel = () => {
-    setIsEditing(false)
-  }
+    const handleCancel = () => {
+      setIsEditing(false)
+    }
 
-  const deleteTodo = (id: number) => {
-    setTodos(prev => prev.filter(todo => todo.id !== id))
-  }
+    const deleteTodo = (id: number) => {
+      setTodos(prev => prev.filter(todo => todo.id !== id))
+    }
 
-  return (
-    <div>
-      <h1>Todo App</h1>
+    return (
       <div>
-        <input
-          type="text"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          placeholder="Add a new todo"
+        <h1>Todo App</h1>
+        <div>
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            placeholder="Add a new todo"
+          />
+          <button onClick={addTodo}>Add Todo</button>
+        </div>
+        <TodoList
+          todos={todos}
+          toggleTodo={toggleTodo}
+          deleteTodo={deleteTodo}
         />
-        <button onClick={addTodo}>Add Todo</button>
-      </div>
-      <div>
-        <ul>
-          {todos.map(todo => (
-            <li key={todo.id}>
-              <button
-                onClick={() => toggleTodo(todo.id)}
-                className=''
-              >
-                {todo.completed ? (
-                  <CheckCircle />
-                ) : (
-                  <Circle />
-                )}
-              </button>
-              {isEditing ? (
-                <>
-                  <input
-                    type="text"
-                    value={editValue}
-                    onChange={(e) => setEditValue(e.target.value)}
-                  />
-                  <button
-                    onClick={() => handleSave(todo.id)}
-                    className=''
-                    title='Save'
-                  >
-                    Save
-                  </button>
-                  <button
-                    onClick={handleCancel}
-                    className=''
-                    title='Cancel'
-                  >
-                    X
-                  </button>
-                </>
-              ) : (
-                <div className='mx-2'>
-                  <span className={`text-sm ${todo.completed ? 'line-through' : ''}`}>{todo.text}</span>
-                </div>
-              )}
-
-              {!isEditing && (
-                <>
-                  <button
-                    className='px-2 py-1 bg-blue-500 text-white rounded'
-                    onClick={() => setIsEditing(true)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className='px-2 py-1 bg-blue-500 text-white rounded'
-                    onClick={() => deleteTodo(todo.id)}
-                  >
-                    Delete
-                  </button>
-                </>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div >
-  )
-}
+      </div >
+    )
+  }
 }
 
 
