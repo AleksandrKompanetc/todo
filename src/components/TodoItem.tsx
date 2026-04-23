@@ -13,44 +13,49 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
   const [editValue, setEditValue] = useState(todo.text)
 
   return (
-    <li className='border-b last:border-none '>
+    <li className='border-b last:border-none flex items-center gap-3 px-5 py-4 hover:bg-gray-50 transition'>
       <button
-        onClick={() => toggleTodo(todo.id)}
-        className=''
+        onClick={() => onToggle(todo.id)}
+        className='text-gray-400 hover:text-gray-500 transition'
       >
         {todo.completed ? (
-          <CheckCircle />
+          <CheckCircle size={26} className='text-green-500' />
         ) : (
-          <Circle />
+          <Circle size={26} />
         )}
       </button>
-      {isEditing ? (
-        <>
-          <input
-            type="text"
-            value={editValue}
-            onChange={(e) => setEditValue(e.target.value)}
-          />
-          <button
-            onClick={() => handleSave(todo.id)}
-            className=''
-            title='Save'
-          >
-            Save
-          </button>
-          <button
-            onClick={handleCancel}
-            className=''
-            title='Cancel'
-          >
-            X
-          </button>
-        </>
-      ) : (
-        <div className='mx-2'>
-          <span className={`text-sm ${todo.completed ? 'line-through' : 'text-gray-700'}`}>{todo.text}</span>
-        </div>
-      )}
+
+      <div className='flex-1 min-w-0'>
+        {isEditing ? (
+          <div className='flex gap-2'>
+            <input
+              type="text"
+              value={editValue}
+              onChange={(e) => setEditValue(e.target.value)}
+              className='flex-1 px-3 py-2 border border-blue-400 rounded-lg focus:outline-none text-lg'
+              autoFocus
+            />
+            <button
+              onClick={() => handleSave(todo.id)}
+              className=''
+              title='Save'
+            >
+              Save
+            </button>
+            <button
+              onClick={handleCancel}
+              className=''
+              title='Cancel'
+            >
+              X
+            </button>
+          </div>
+        ) : (
+          <div className='mx-2'>
+            <span className={`text-sm ${todo.completed ? 'line-through' : 'text-gray-700'}`}>{todo.text}</span>
+          </div>
+        )}
+      </div>
 
       {!isEditing && (
         <>
