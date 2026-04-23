@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Circle, CheckCircle } from 'lucide-react'
+import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
 
 interface Todo {
@@ -9,10 +9,8 @@ interface Todo {
 }
 
 export default function App() {
-  const [value, setValue] = useState('')
   const [todos, setTodos] = useState<Todo[]>([])
-  const [editValue, setEditValue] = useState('')
-  const [isEditing, setIsEditing] = useState(false)
+
 
   const addTodo = () => {
     if (!value.trim()) return
@@ -55,15 +53,7 @@ export default function App() {
     return (
       <div>
         <h1>Todo App</h1>
-        <div>
-          <input
-            type="text"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            placeholder="Add a new todo"
-          />
-          <button onClick={addTodo}>Add Todo</button>
-        </div>
+        <TodoForm onAdd={addTodo} />
         <TodoList
           todos={todos}
           toggleTodo={toggleTodo}

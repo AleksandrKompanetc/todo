@@ -1,66 +1,24 @@
-import { useState } from 'react'
+import type { Todo } from '../types'
+import TodoItem from './TodoItem'
 
-export default function TodoList({ todos, toggleTodo, deleteTodo }) {
+interface TodoListProps {
+  todos: Todo[]
+  toggleTodo: (id: number) => void
+  deleteTodo: (id: number) => void
+}
+
+export default function TodoList({ todos, toggleTodo, deleteTodo }: TodoListProps) {
   return (
     <div>
       <ul>
         {todos.map(todo => (
-          <li key={todo.id}>
-            <button
-              onClick={() => toggleTodo(todo.id)}
-              className=''
-            >
-              {todo.completed ? (
-                <CheckCircle />
-              ) : (
-                <Circle />
-              )}
-            </button>
-            {isEditing ? (
-              <>
-                <input
-                  type="text"
-                  value={editValue}
-                  onChange={(e) => setEditValue(e.target.value)}
-                />
-                <button
-                  onClick={() => handleSave(todo.id)}
-                  className=''
-                  title='Save'
-                >
-                  Save
-                </button>
-                <button
-                  onClick={handleCancel}
-                  className=''
-                  title='Cancel'
-                >
-                  X
-                </button>
-              </>
-            ) : (
-              <div className='mx-2'>
-                <span className={`text-sm ${todo.completed ? 'line-through' : ''}`}>{todo.text}</span>
-              </div>
-            )}
-
-            {!isEditing && (
-              <>
-                <button
-                  className='px-2 py-1 bg-blue-500 text-white rounded'
-                  onClick={() => setIsEditing(true)}
-                >
-                  Edit
-                </button>
-                <button
-                  className='px-2 py-1 bg-blue-500 text-white rounded'
-                  onClick={() => deleteTodo(todo.id)}
-                >
-                  Delete
-                </button>
-              </>
-            )}
-          </li>
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            toggleTodo={toggleTodo
+          deleteTodo={deleteTodo}
+          }
+          />
         ))}
       </ul>
     </div>
