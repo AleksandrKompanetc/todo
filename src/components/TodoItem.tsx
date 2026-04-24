@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Circle, CheckCircle } from 'lucide-react'
+import { Circle, CheckCircle, Save } from 'lucide-react'
 import type { Todo } from '../types'
 
 interface TodoItemProps {
@@ -11,6 +11,13 @@ interface TodoItemProps {
 export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [editValue, setEditValue] = useState(todo.text)
+
+  const handleSave = () => {
+    if (editValue.trim() && editValue !== todo.text) {
+      onEdit(todo.id, editValue.trim())
+    }
+    setIsEditing(false)
+  }
 
   return (
     <li className='border-b last:border-none flex items-center gap-3 px-5 py-4 hover:bg-gray-50 transition'>
@@ -32,22 +39,23 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
               type="text"
               value={editValue}
               onChange={(e) => setEditValue(e.target.value)}
+              onKeyDown={handleKeyDown}
               className='flex-1 px-3 py-2 border border-blue-400 rounded-lg focus:outline-none text-lg'
               autoFocus
             />
             <button
-              onClick={() => handleSave(todo.id)}
-              className=''
+              onClick={handleSave}
+              className='text-green-600 hover:text-green-700 p-2'
               title='Save'
             >
-              Save
+              <Save size={20} />
             </button>
             <button
               onClick={handleCancel}
               className=''
               title='Cancel'
             >
-              X
+              <X size={20} />
             </button>
           </div>
         ) : (
