@@ -24,6 +24,10 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
     setIsEditing(false)
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    
+  }
+
   return (
     <li className='border-b last:border-none flex items-center gap-3 px-5 py-4 hover:bg-gray-50 transition'>
       <button
