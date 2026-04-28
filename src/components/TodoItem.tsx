@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Circle, CheckCircle, Save } from 'lucide-react'
+import { Circle, CheckCircle, Save, X } from 'lucide-react'
 import type { Todo } from '../types'
 
 interface TodoItemProps {
@@ -25,7 +25,11 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    
+    if (e.key === 'Enter') {
+      handleSave()
+    } else if (e.key === 'Escape') {
+      handleCancel()
+    }
   }
 
   return (
@@ -68,23 +72,27 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
             </button>
           </div>
         ) : (
-          <div className='mx-2'>
-            <span className={`text-sm ${todo.completed ? 'line-through' : 'text-gray-700'}`}>{todo.text}</span>
-          </div>
+          <span className={`text-lg break-words ${
+            todo.completed ? 'line-through text-gray-400' : 'text-gray-700'}`}
+            >
+              {todo.text}
+          </span>
         )}
       </div>
 
       {!isEditing && (
         <>
           <button
-            className='px-2 py-1 bg-blue-500 text-white rounded'
+            className='text-gray-400 hover:text-blue-600 p-2 rounded-lg hover:bg-blue-50 transition'
             onClick={() => setIsEditing(true)}
+            title='Edit'
           >
             Edit
           </button>
           <button
-            className='px-2 py-1 bg-blue-500 text-white rounded'
-            onClick={() => deleteTodo(todo.id)}
+            className='text-gray-400 hover:text-red-500 p-2 rounded-lg hover:bg-red-50 transition'
+            onClick={() => onDelete(todo.id)}
+            title='Delete'
           >
             Delete
           </button>

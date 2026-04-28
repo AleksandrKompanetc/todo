@@ -16,7 +16,7 @@ export default function TodoList({ todos, toggleTodo, deleteTodo }: TodoListProp
             key={todo.id}
             todo={todo}
             toggleTodo={toggleTodo
-          deleteTodo={deleteTodo}
+          onDelete={deleteTodo}
           }
           />
         ))}
