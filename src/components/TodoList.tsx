@@ -3,11 +3,21 @@ import TodoItem from './TodoItem'
 
 interface TodoListProps {
   todos: Todo[]
-  toggleTodo: (id: number) => void
-  deleteTodo: (id: number) => void
+  onToggle: (id: number) => void
+  onDelete: (id: number) => void
+  onEdit: (id: number, newText: string) => void
 }
 
-export default function TodoList({ todos, toggleTodo, deleteTodo }: TodoListProps) {
+export default function TodoList({ todos, onToggle, onDelete, onEdit }: TodoListProps) {
+  if (todos.length === 0) {
+    return (
+      <div className='bg-white rounded-2xl shadow-sm py-12'>
+        <p>
+          {todos.length === 0 ? 'No todos yet!' : 'All caught up!'}
+        </p>
+      </div>
+    )
+  }
   return (
     <div>
       <ul>
@@ -15,9 +25,9 @@ export default function TodoList({ todos, toggleTodo, deleteTodo }: TodoListProp
           <TodoItem
             key={todo.id}
             todo={todo}
-            toggleTodo={toggleTodo
-          onDelete={deleteTodo}
-          }
+            onToggle={onToggle}
+            onDelete={onDelete}
+            onEdit={onEdit}
           />
         ))}
       </ul>
