@@ -1,14 +1,15 @@
 import { useState } from 'react'
-import { Circle, CheckCircle, Save, X } from 'lucide-react'
+import { Trash2, CheckCircle, Circle, Save, X, Edit2 } from 'lucide-react'
 import type { Todo } from '../types'
 
 interface TodoItemProps {
-  todo: Todo[]
+  todo: Todo
   onToggle: (id: number) => void
   onDelete: (id: number) => void
+  onEdit: (id: number, newText: string) => void
 }
 
-export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
+export default function TodoItem({ todo, onToggle, onDelete, onEdit }: TodoItemProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [editValue, setEditValue] = useState(todo.text)
 
@@ -87,14 +88,14 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
             onClick={() => setIsEditing(true)}
             title='Edit'
           >
-            Edit
+            <Edit2 size={20} />
           </button>
           <button
             className='text-gray-400 hover:text-red-500 p-2 rounded-lg hover:bg-red-50 transition'
             onClick={() => onDelete(todo.id)}
             title='Delete'
           >
-            Delete
+            <Trash2 size={20} />
           </button>
         </>
       )}
