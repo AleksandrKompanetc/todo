@@ -1,5 +1,5 @@
-import type { Todo } from '../types'
 import TodoItem from './TodoItem'
+import type { Todo } from '../types'
 
 interface TodoListProps {
   todos: Todo[]
@@ -12,14 +12,14 @@ export default function TodoList({ todos, onToggle, onDelete, onEdit }: TodoList
   if (todos.length === 0) {
     return (
       <div className='bg-white rounded-2xl shadow-sm py-12'>
-        <p>
+        <p className='text-center text-gray-500 text-lg'>
           {todos.length === 0 ? 'No todos yet!' : 'All caught up!'}
         </p>
       </div>
     )
   }
   return (
-    <div>
+    <div className='bg-white rounded-2xl shadow-sm overflow-hidden'>
       <ul>
         {todos.map(todo => (
           <TodoItem
