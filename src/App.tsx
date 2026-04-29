@@ -1,15 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
 
-interface Todo {
-  id: number
-  text: string
-  completed: boolean
-}
-
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
+  const [filter, setFilter] = useState<Filter>('all')
+  const [isDark, setIsDark] = useState(false)
 
 
   const addTodo = () => {
