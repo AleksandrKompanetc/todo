@@ -1,11 +1,33 @@
 import { useState, useEffect } from 'react'
 import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
+import type { Todo } from './types'
+import type { Filter, Theme } from './types'
 
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
   const [filter, setFilter] = useState<Filter>('all')
   const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    const savedTodos = localStorage.getItem('todos')
+    if (savedTodos) {
+      setTodos(JSON.parse(savedTodos))
+    }
+    const savedTheme = localStorage.getItem('theme') as Theme | null
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark)
+
+    setIsDark(shouldBeDark)
+    if (shouldBeDark) {
+      document.documentElement.classList.add('dark')
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])
 
 
   const addTodo = () => {
