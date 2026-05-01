@@ -30,15 +30,16 @@ export default function App() {
   }, [todos])
 
 
-  const addTodo = () => {
-    if (!value.trim()) return
-    let newTodo = {
-      id: Date.now(),
-      text: value.trim(),
-      completed: false
-    }
-    setTodos(prev => [...prev, newTodo])
-    setValue('')
+  const addTodo = (text: string) => {
+    if (!text.trim()) return
+    setTodos(prev => [
+      ...prev,
+      {
+        id: Date.now(),
+        text: text.trim(),
+        completed: false
+      }
+    ])
   }
 
   const toggleTodo = (id: number) => {
