@@ -52,10 +52,10 @@ export default function App() {
     setTodos(prev => prev.filter(todo => todo.id !== id))
   }
 
-  const editTodo = (id: number) => {
-    if (!editValue.trim()) return
+  const editTodo = (id: number, newText: string) => {
+    if (!newText.trim()) return
     setTodos(prev => prev.map(todo =>
-      todo.id === id ? { ...todo, text: editValue.trim() } : todo
+      todo.id === id ? { ...todo, text: newText.trim() } : todo
     ))
   }
 
