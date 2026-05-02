@@ -59,6 +59,12 @@ export default function App() {
     ))
   }
 
+  const clearCompleted = () => {
+    setTodos(prev => prev.filter(todo => !todo.completed))
+  }
+
+  
+
   const handleSave = (id: number) => {
     if (editValue.trim()) {
       editTodo(id)
