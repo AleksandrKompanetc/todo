@@ -48,6 +48,10 @@ export default function App() {
     ))
   }
 
+  const deleteTodo = (id: number) => {
+    setTodos(prev => prev.filter(todo => todo.id !== id))
+  }
+
   const editTodo = (id: number) => {
     if (!editValue.trim()) return
     setTodos(prev => prev.map(todo =>
@@ -63,10 +67,6 @@ export default function App() {
 
     const handleCancel = () => {
       setIsEditing(false)
-    }
-
-    const deleteTodo = (id: number) => {
-      setTodos(prev => prev.filter(todo => todo.id !== id))
     }
 
     return (
