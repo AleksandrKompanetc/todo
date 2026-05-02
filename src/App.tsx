@@ -63,6 +63,12 @@ export default function App() {
     setTodos(prev => prev.filter(todo => !todo.completed))
   }
 
+  const filteredTodos = todos.filter(todo => {
+    if (filter === 'active') return !todo.completed
+    if (filter === 'completed') return todo.completed
+    return true
+  })
+
   
 
   const handleSave = (id: number) => {
