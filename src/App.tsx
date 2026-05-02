@@ -69,7 +69,7 @@ export default function App() {
     return true
   })
 
-  
+  const activeCount = todos.filter(todo => !todo.completed).length
 
   const handleSave = (id: number) => {
     if (editValue.trim()) {
