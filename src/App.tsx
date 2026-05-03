@@ -83,31 +83,23 @@ export default function App() {
       document.documentElement.classList.remove('dark')
       localStorage.setItem('theme', 'light')
     }
-    }
   }
 
-  const handleSave = (id: number) => {
-    if (editValue.trim()) {
-      editTodo(id)
-      setIsEditing(false)
-    }
+  return (
+    <div className='min-h-screen bg-gray-100 py-8 px-4'>
+      <div className='max-w-xl mx-auto'>
+        <h1 className='text-4xl font-bold text-center mb-8 text-gray-800'>Todo App</h1>
+        <ThemeToggle theme={isDark ? 'dark' : 'light'} onToggle={toggleTheme} />
 
-    const handleCancel = () => {
-      setIsEditing(false)
-    }
-
-    return (
-      <div>
-        <h1>Todo App</h1>
         <TodoForm onAdd={addTodo} />
         <TodoList
           todos={todos}
           toggleTodo={toggleTodo}
           deleteTodo={deleteTodo}
         />
-      </div >
-    )
-  }
+      </div>
+    </div>
+  )
 }
 
 
