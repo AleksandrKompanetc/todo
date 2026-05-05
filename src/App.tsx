@@ -5,6 +5,7 @@ import Filters from './components/Filters'
 import ThemeToggle from './components/ThemeToggle'
 import type { Todo } from './types'
 import type { Filter, Theme } from './types'
+import TodoStats from './components/TodoStats'
 
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
@@ -100,6 +101,13 @@ export default function App() {
           toggleTodo={toggleTodo}
           deleteTodo={deleteTodo}
         />
+        {todos.length > 0 && (
+          <TodoStats
+            activeCount={activeCount}
+            completedCount={completedCount}
+            onClearCompleted={clearCompleted}
+          />
+        )}
       </div>
     </div>
   )
