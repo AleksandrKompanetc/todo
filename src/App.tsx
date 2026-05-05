@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
+import Filters from './components/Filters'
+import ThemeToggle from './components/ThemeToggle'
 import type { Todo } from './types'
 import type { Filter, Theme } from './types'
 
@@ -92,6 +94,7 @@ export default function App() {
         <ThemeToggle theme={isDark ? 'dark' : 'light'} onToggle={toggleTheme} />
 
         <TodoForm onAdd={addTodo} />
+        <Filters currentFilter={filter} onFilterChange={setFilter} />
         <TodoList
           todos={todos}
           toggleTodo={toggleTodo}
