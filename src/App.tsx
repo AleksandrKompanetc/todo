@@ -92,20 +92,19 @@ export default function App() {
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
       <div className='max-w-xl mx-auto'>
         <h1 className='text-4xl font-bold text-center mb-8 text-gray-800'>Todo App</h1>
-        <ThemeToggle theme={isDark ? 'dark' : 'light'} onToggle={toggleTheme} />
+        <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
 
         <TodoForm onAdd={addTodo} />
         <Filters currentFilter={filter} onFilterChange={setFilter} />
         <TodoList
-          todos={todos}
-          toggleTodo={toggleTodo}
-          deleteTodo={deleteTodo}
+          todos={filteredTodos}
+          onToggle={toggleTodo}
+          onDelete={deleteTodo}
+          onEdit={editTodo}
         />
         {todos.length > 0 && (
           <TodoStats
             activeCount={activeCount}
-            completedCount={completedCount}
-            onClearCompleted={clearCompleted}
           />
         )}
       </div>

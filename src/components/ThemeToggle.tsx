@@ -1,5 +1,4 @@
 import { Moon, Sun } from 'lucide-react'
-import type { Theme } from '../types'
 
 interface Props {
   isDark: boolean
