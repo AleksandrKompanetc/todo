@@ -2,11 +2,16 @@ import { useState } from 'react'
 
 export default function App() {
   const [todos, setTodos] = useState([])
-  
+  const [value, setValue] = useState('')
+
   return (
     <div>
       <h1>Todo App</h1>
-      <input type="text" />
+      <input 
+        type="text" 
+        value={value}
+        onChange={(e) => setValue(e.target.value)}  
+      />
       <button className="bg-blue-500 px-2 py-1 rounded-xl text-white">Add</button>
     </div>
   )
