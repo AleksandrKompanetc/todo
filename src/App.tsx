@@ -1,8 +1,27 @@
 import { useState } from 'react'
 
+interface Todo {
+  id: number
+  text: string
+  completed: boolean
+}
+
 export default function App() {
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState<Todo[]>([])
   const [value, setValue] = useState('')
+
+  const addTodo = () => {
+    if (!value.trim()) return
+
+    const newTodo = {
+      id: Date.now(),
+      text: value.trim(),
+      completed: false
+    }
+
+    setTodos(prev => [...prev, newTodo])
+    setValue('')
+  }
 
   return (
     <div>
@@ -12,7 +31,12 @@ export default function App() {
         value={value}
         onChange={(e) => setValue(e.target.value)}  
       />
-      <button className="bg-blue-500 px-2 py-1 rounded-xl text-white">Add</button>
+      <button
+        onClick={addTodo}
+        className="bg-blue-500 px-2 py-1 rounded-xl text-white"
+       >
+        Add
+      </button>
     </div>
   )
 }
