@@ -23,6 +23,10 @@ export default function App() {
     setValue('')
   }
 
+  const deleteTodo = (id: number) => {
+    setTodos(prev => prev.filter(todo => todo.id !== id))
+  }
+
   return (
     <div>
       <h1>Todo App</h1>
@@ -43,7 +47,11 @@ export default function App() {
             <div key={todo.id}>
               <button></button>
               <span>{todo.text}</span>
-              <button>Delete</button>
+              <button 
+                onClick={() => deleteTodo(todo.id)}
+              >
+                Delete
+              </button>
             </div>
         ))
         }
