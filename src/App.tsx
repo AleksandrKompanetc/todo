@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import TodoForm from './components/TodoForm'
 
 interface Todo {
   id: number
@@ -8,54 +9,25 @@ interface Todo {
 
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
-  const [value, setValue] = useState('')
 
-  const addTodo = () => {
-    if (!value.trim()) return
-
+  const addTodo = (text: string) => {
+    if (!text.trim()) return
     const newTodo = {
       id: Date.now(),
-      text: value.trim(),
+      text: text.trim(),
       completed: false
     }
+    setTodos(prev => [
+      ...prev,
+      newTodo
 
-    setTodos(prev => [...prev, newTodo])
-    setValue('')
-  }
-
-  const deleteTodo = (id: number) => {
-    setTodos(prev => prev.filter(todo => todo.id !== id))
+    ])
   }
 
   return (
     <div>
       <h1>Todo App</h1>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-      <button
-        onClick={addTodo}
-        className="bg-blue-500 px-2 py-1 rounded-xl text-white"
-      >
-        Add
-      </button>
-      <div>
-        {
-          todos.map(todo => (
-            <div key={todo.id}>
-              <button></button>
-              <span>{todo.text}</span>
-              <button 
-                onClick={() => deleteTodo(todo.id)}
-              >
-                Delete
-              </button>
-            </div>
-        ))
-        }
-      </div>
+      <TodoForm addTodo={addTodo} />
     </div>
   )
 }

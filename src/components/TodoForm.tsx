@@ -7,8 +7,17 @@ interface TodoFormProps {
 
 export default function TodoForm({onAdd}: TodoFormProps) {
   const [inputValue, setInputValue] = useState('')
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault()
+  if (!inputValue.trim()) return
+  onAdd(inputValue.trim())
+  setInputValue('')
+}
+
   return (
     <form
+      onSubmit={handleSubmit}
       className=""
     >
       <input 
