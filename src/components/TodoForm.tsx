@@ -1,3 +1,56 @@
+import { useState } from 'react'
+import { Plus } from 'lucide-react'
+
+interface TodoFormProps {
+  onAdd: (text: string) => void
+}
+
+export default function TodoForm({onAdd}: TodoFormProps) {
+  const [inputValue, setInputValue] = useState('')
+  return (
+    <form
+      className=""
+    >
+      <input 
+        type="text" 
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+      <button
+        className=''
+      >
+        <Plus />
+      </button>
+    </form>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import { useState } from 'react'
 // import { Plus } from 'lucide-react'
 
