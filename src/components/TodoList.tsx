@@ -1,3 +1,56 @@
+import type { Todo } from '../types'
+
+interface TodoListProps {
+  todo: Todo
+  toggleTodo: (id: number) => void
+  deleteTodo: (id: number) => void
+  editTodo: (id: number, newText: string) => void
+}
+
+export default function TodoList({todo, toggleTodo, deleteTodo, editTodo}: TodoListProps) {
+  return (
+    <div>
+      <ul>
+        {todos.map(todo => (
+          <li>
+            <button></button>
+            <span>{todo.text}</span>
+            <button></button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import TodoItem from './TodoItem'
 // import type { Todo } from '../types'
 
