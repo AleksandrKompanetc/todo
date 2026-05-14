@@ -9,7 +9,9 @@ interface TodoItemProps {
 }
 
 export default function TodoItem({todo, toggleTodo, deleteTodo, editTodo}): TodoItemProps {
-  
+  const [isEditing, setIsEditing] = useState(false)
+  const [editValue, setEditValue] = useState(todo.text)
+
   return (
     <li >
       <button></button>
