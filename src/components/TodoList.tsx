@@ -1,22 +1,36 @@
+import TodoItem from './TodoItem'
 import type { Todo } from '../types'
 
 interface TodoListProps {
-  todo: Todo
+  todos: Todo[]
   toggleTodo: (id: number) => void
   deleteTodo: (id: number) => void
   editTodo: (id: number, newText: string) => void
 }
 
-export default function TodoList({todo, toggleTodo, deleteTodo, editTodo}: TodoListProps) {
+export default function TodoList({todos, toggleTodo, deleteTodo, editTodo}: TodoListProps) {
+  if (todos.length === 0) {
+    return (
+      <div className='bg-white rounded-2xl shadow-sm py-12'>
+        <p className='text-center text-gray-500 text-lg'>
+          {todos.length === 0 ? 'No todos yet!' : 'All caught up!'}
+        </p>
+      </div>
+    )
+  }
+
+
   return (
-    <div>
+    <div className='bg-white rounded-2xl shadow-sm overflow-hidden'>
       <ul>
         {todos.map(todo => (
-          <li>
-            <button></button>
-            <span>{todo.text}</span>
-            <button></button>
-          </li>
+          <TodoItem 
+            key={todo.id}
+            todo={todo}
+            toggleTodo={toggleTodo}
+            deleteTodo={deleteTodo}
+            editTodo={editTodo}
+          />
         ))}
       </ul>
     </div>
