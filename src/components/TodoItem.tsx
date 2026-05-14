@@ -1,3 +1,71 @@
+import { useState } from 'react'
+import type { Todo } from '../types'
+
+interface TodoItemProps {
+  todo: Todo
+  toggleTodo: (id: number) => void
+  deleteTodo: (id: number) => void
+  editTodo: (id: number, newText: string) => void
+}
+
+export default function TodoItem({todo, toggleTodo, deleteTodo, editTodo}): TodoItemProps {
+  
+  return (
+    <li >
+      <button></button>
+      <div>
+        {isEditing ? (
+            <div>
+              <input type="text" />
+              <button></button>
+              <button></button>
+            </div>
+          ) : (
+            <span>
+
+            </span>
+          )
+        }
+      </div>
+
+        {!isEditing && (
+          <div>
+            <button></button>
+            <button></button>
+          </div>
+        )}
+
+    </li>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import { useState } from 'react'
 // import { Trash2, CheckCircle, Circle, Save, X, Edit2 } from 'lucide-react'
 // import type { Todo } from '../types'
