@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CheckCircle, Circle } from 'lucide-react'
 import type { Todo } from '../types'
 
 interface TodoItemProps {
@@ -8,13 +9,22 @@ interface TodoItemProps {
   editTodo: (id: number, newText: string) => void
 }
 
-export default function TodoItem({todo, toggleTodo, deleteTodo, editTodo}): TodoItemProps {
+export default function TodoItem({todo, toggleTodo, deleteTodo, editTodo}: TodoItemProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [editValue, setEditValue] = useState(todo.text)
 
   return (
     <li >
-      <button></button>
+      <button
+        onClick={() => toggleTodo(todo.id)}
+        className=''
+      >
+        {todo.completed ? (
+          <CheckCircle />
+        ) : (
+          <Circle />
+        )}
+      </button>
       <div>
         {isEditing ? (
             <div>
