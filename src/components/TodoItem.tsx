@@ -13,6 +13,14 @@ export default function TodoItem({todo, toggleTodo, deleteTodo, editTodo}: TodoI
   const [isEditing, setIsEditing] = useState(false)
   const [editValue, setEditValue] = useState(todo.text)
 
+  const handleSave = () => {
+    if (editValue.trim() && editValue !== todo.text) {
+      editTodo(todo.id, editValue.trim())
+    }
+  }
+
+  
+
   return (
     <li className='border-b last:border-none flex items-center gap-3 px-5 py-4 hover:bg-gray-50 transition'>
       <button
