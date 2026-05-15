@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CheckCircle, Circle } from 'lucide-react'
+import { CheckCircle, Circle, Save, X, Edit2, Trash2 } from 'lucide-react'
 import type { Todo } from '../types'
 
 interface TodoItemProps {
@@ -14,36 +14,71 @@ export default function TodoItem({todo, toggleTodo, deleteTodo, editTodo}: TodoI
   const [editValue, setEditValue] = useState(todo.text)
 
   return (
-    <li >
+    <li className='border-b last:border-none flex items-center gap-3 px-5 py-4 hover:bg-gray-50 transition'>
       <button
         onClick={() => toggleTodo(todo.id)}
-        className=''
+        className='text-gray-400 hover:text-gray-500 transition'
       >
         {todo.completed ? (
-          <CheckCircle />
+          <CheckCircle size={26} className='text-green-500' />
         ) : (
-          <Circle />
+          <Circle size={26} />
         )}
       </button>
-      <div>
+      <div className='flex-1 min-w-0'>
         {isEditing ? (
-            <div>
-              <input type="text" />
-              <button></button>
-              <button></button>
+            <div className='flex gap-2'>
+              <input 
+                type="text" 
+                value={editValue}
+                onChange={(e) => setEditValue(e.target.value)}
+                onKeyDown={handleKeyDown}
+                className='flex-1 px-3 py-2 border border-blue-400 rounded-lg focus:outline-none text-lg'
+                autoFocus
+              />
+              <button
+                onClick={handleSave}
+                className='text-green-600 hover:text-green-700 p-2'
+                title='Save'
+              >
+                <Save size={20} />
+              </button>
+              <button
+                onClick={handleCancel}
+                className='text-green-500 hover:text-green-700 p-2'
+                title='Cancel'
+              >
+                <X size={20} />
+              </button>
             </div>
           ) : (
-            <span>
-
+            <span
+              className={`text-lg break-words ${
+                todo.completed ? 'line-through text-gray-400' : 'text-gray-700'
+              }`}
+            >
+              {todo.text}
             </span>
           )
         }
       </div>
 
         {!isEditing && (
-          <div>
-            <button></button>
-            <button></button>
+          <div className='flex'>
+            <button
+              onClick={() => setIsEditing(true)}
+              className='text-gray-400 hover:text-blue-600 p-2 rounded-lg hover:bg-blue-50 transition'
+              title='Edit'
+            >
+              <Edit2 size={20} />
+            </button>
+            <button
+              onClick={() => deleteTodo(todo.id)}
+              className='text-gray-400 hover:text-red-500 p-2 rounded-lg hover:bg-red-50 transition'
+              title='Delete'
+            >
+              <Trash2 size={20} />
+             </button>
           </div>
         )}
 
