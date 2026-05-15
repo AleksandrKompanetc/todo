@@ -19,7 +19,10 @@ export default function TodoItem({todo, toggleTodo, deleteTodo, editTodo}: TodoI
     }
   }
 
-  
+  const handleCancel = () => {
+    setEditValue(todo.text)
+    setIsEditing(false)
+  }
 
   return (
     <li className='border-b last:border-none flex items-center gap-3 px-5 py-4 hover:bg-gray-50 transition'>
