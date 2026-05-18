@@ -2,16 +2,16 @@ import { useState } from 'react'
 import { Plus } from 'lucide-react'
 
 interface TodoFormProps {
-  onAdd: (text: string) => void
+  addTodo: (text: string) => void
 }
 
-export default function TodoForm({onAdd}: TodoFormProps) {
+export default function TodoForm({addTodo}: TodoFormProps) {
   const [inputValue, setInputValue] = useState('')
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault()
   if (!inputValue.trim()) return
-  onAdd(inputValue.trim())
+  addTodo(inputValue.trim())
   setInputValue('')
 }
 

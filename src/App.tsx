@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import TodoForm from './components/TodoForm'
+import TodoList from './components/TodoList'
 
 interface Todo {
   id: number
@@ -25,9 +26,18 @@ export default function App() {
   }
 
   return (
-    <div>
-      <h1>Todo App</h1>
-      <TodoForm addTodo={addTodo} />
+    <div className='min-h-screen bg-gray-100 py-8 px-4'>
+      <div className='max-w-xl mx-auto'>
+        <h1>Todo App</h1>
+        <TodoForm addTodo={addTodo} />
+
+        <TodoList
+          todos={filteredTodos}
+          toggleTodo={toggleTodo}
+          deleteTodo={deleteTodo}
+          editTodo={editTodo}
+        />
+       </div>
     </div>
   )
 }
