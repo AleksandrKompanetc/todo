@@ -33,6 +33,10 @@ export default function App() {
     )
   }
 
+  const deleteTodo = (id: number) => {
+    setTodos(prev => prev.filter(todo => todo.id !== id))
+  }
+
   const filteredTodos = todos.filter(todo => {
     if (filter === 'active') return !todo.completed
     if (filter === 'completed') return todo.completed
