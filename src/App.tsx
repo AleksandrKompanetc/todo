@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
+import type { Filter } from './types'
 
 interface Todo {
   id: number
@@ -10,6 +11,7 @@ interface Todo {
 
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
+  const [filter, setFilter] = useState<Filter>('all')
 
   const addTodo = (text: string) => {
     if (!text.trim()) return
