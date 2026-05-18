@@ -13,15 +13,13 @@ export default function App() {
 
   const addTodo = (text: string) => {
     if (!text.trim()) return
-    const newTodo = {
-      id: Date.now(),
-      text: text.trim(),
-      completed: false
-    }
     setTodos(prev => [
       ...prev,
-      newTodo
-
+      {
+        id: Date.now(),
+        text: text.trim(),
+        completed: false
+      }
     ])
   }
 
