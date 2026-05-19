@@ -4,8 +4,8 @@ interface TodoStatsProps {
 
 export default function TodoStats({ activeCount }: TodoStatsProps) {
   return (
-    <div>
-      Remains to be done: <span>{activeCount}</span>
+    <div className='text-center mt-6 text-gray-500'>
+      Remains to be done: <span className='font-semibold text-gray-700'>{activeCount}</span>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
 import type { Filter } from './types'
+import TodoStats from './components/TodoStats'
 
 interface Todo {
   id: number
@@ -63,6 +64,8 @@ export default function App() {
     return true
   })
 
+  const activeCount = todos.filter(todo => !todo.completed).length
+
   return (
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
       <div className='max-w-xl mx-auto'>
@@ -75,6 +78,11 @@ export default function App() {
           deleteTodo={deleteTodo}
           editTodo={editTodo}
         />
+        {todos.length > 0 && (
+          <TodoStats
+            activeCount={activeCount}
+          />
+        )}
        </div>
     </div>
   )
