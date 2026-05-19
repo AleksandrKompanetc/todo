@@ -1,3 +1,20 @@
+interface TodoStatsProps {
+  activeCount: number
+}
+
+export default function TodoStats({ activeCount }: TodoStatsProps) {
+  return (
+    <div>
+      Remains to be done: <span>{activeCount}</span>
+    </div>
+  )
+}
+
+
+
+
+
+
 // interface TodoStatsProps {
 //   activeCount: number
 // }
