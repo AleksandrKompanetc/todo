@@ -14,6 +14,13 @@ export default function App() {
   const [filter, setFilter] = useState<Filter>('all')
 
   useEffect(() => {
+    const savedTodos = localStorage.getItem('todos')
+    if (savedTodos) {
+      setTodos(JSON.parse(savedTodos))
+    }
+  }, [])
+
+  useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos))
   }, [todos])
 
