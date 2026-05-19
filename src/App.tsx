@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
 import type { Filter } from './types'
@@ -12,6 +12,10 @@ interface Todo {
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
   const [filter, setFilter] = useState<Filter>('all')
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])
 
   const addTodo = (text: string) => {
     if (!text.trim()) return
@@ -55,7 +59,7 @@ export default function App() {
   return (
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
       <div className='max-w-xl mx-auto'>
-        <h1>Todo App</h1>
+        <h1 className='text-4xl font-bold text-center mb-8 text-gray-800'>Todo App</h1>
         <TodoForm addTodo={addTodo} />
 
         <TodoList
