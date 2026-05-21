@@ -1,3 +1,38 @@
+import { Filter } from '../types'
+
+interface FiltersProps {
+  currentFilter: Filter
+  onFilterChange: (filter: Filter) => void
+}
+
+const filterOptions: { value: Filter, label: string }[] = [
+  { value: 'all', label: 'All' },
+  { value: 'active', label: 'Active' },
+  { value: 'completed', label: 'Completed' }
+]
+
+export default function Filters({ currentFilter, onFilterChange }: FiltersProps) {
+  return (
+    <div>
+      {filterOptions.map(({ value, label }) => (
+        <button
+          key={value}
+          onClick={() => onFilterChange(value)}
+        >
+          {label}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+
+
+
+
+
+
+
 // import { Filter } from '../types'
 
 // interface FiltersProps {

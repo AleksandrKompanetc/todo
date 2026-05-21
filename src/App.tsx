@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import TodoForm from './components/TodoForm'
+import Filters from './components/Filters'
 import TodoList from './components/TodoList'
 import type { Filter } from './types'
 import TodoStats from './components/TodoStats'
@@ -71,7 +72,7 @@ export default function App() {
       <div className='max-w-xl mx-auto'>
         <h1 className='text-4xl font-bold text-center mb-8 text-gray-800'>Todo App</h1>
         <TodoForm addTodo={addTodo} />
-
+        <Filters />
         <TodoList
           todos={filteredTodos}
           toggleTodo={toggleTodo}
