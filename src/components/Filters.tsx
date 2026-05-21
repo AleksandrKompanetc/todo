@@ -18,6 +18,11 @@ export default function Filters({ currentFilter, onFilterChange }: FiltersProps)
         <button
           key={value}
           onClick={() => onFilterChange(value)}
+          className={`px-5 py-2 rounded-lg font-medium transition ${
+            currentFilter === value
+            ? 'bg-blue-600 text-white shadow-sm'
+            : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+          }`}
         >
           {label}
         </button>
