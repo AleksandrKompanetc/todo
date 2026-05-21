@@ -72,7 +72,7 @@ export default function App() {
       <div className='max-w-xl mx-auto'>
         <h1 className='text-4xl font-bold text-center mb-8 text-gray-800'>Todo App</h1>
         <TodoForm addTodo={addTodo} />
-        <Filters />
+        <Filters currentFilter={filter} onFilterChange={setFilter} />
         <TodoList
           todos={filteredTodos}
           toggleTodo={toggleTodo}
