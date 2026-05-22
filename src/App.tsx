@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import TodoForm from './components/TodoForm'
+import ThemeToggle from './components/ThemeToggle'
 import Filters from './components/Filters'
 import TodoList from './components/TodoList'
 import type { Filter } from './types'
@@ -21,6 +22,9 @@ export default function App() {
     if (savedTodos) {
       setTodos(JSON.parse(savedTodos))
     }
+
+    const savedTheme = localStorage.getItem('theme') as Theme | null
+    const prefersTheme = 
   }, [])
 
   useEffect(() => {
