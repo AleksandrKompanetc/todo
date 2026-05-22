@@ -18,9 +18,6 @@ export default function ThemeToggle({ isDark, onToggle }: Props) {
 
 
 
-
-
-
 // import { Moon, Sun } from 'lucide-react'
 
 // interface Props {
