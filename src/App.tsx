@@ -14,6 +14,7 @@ interface Todo {
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
   const [filter, setFilter] = useState<Filter>('all')
+  const [dark, setDark] = useState(false)
 
   useEffect(() => {
     const savedTodos = localStorage.getItem('todos')
@@ -71,7 +72,7 @@ export default function App() {
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
       <div className='max-w-xl mx-auto'>
         <h1 className='text-4xl font-bold text-center mb-8 text-gray-800'>Todo App</h1>
-        <ThemeToggle theme={isDark ? 'dark' : 'light'} onToggle={toggleTheme} />
+        <ThemeToggle isDark={dark} onToggle={() => setDark(!dark)} />
 
 
         <TodoForm addTodo={addTodo} />
