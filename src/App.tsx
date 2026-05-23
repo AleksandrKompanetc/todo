@@ -3,7 +3,7 @@ import TodoForm from './components/TodoForm'
 import ThemeToggle from './components/ThemeToggle'
 import Filters from './components/Filters'
 import TodoList from './components/TodoList'
-import type { Filter } from './types'
+import type { Todo, Filter, Theme } from './types'
 import TodoStats from './components/TodoStats'
 
 interface Todo {
@@ -24,7 +24,14 @@ export default function App() {
     }
 
     const savedTheme = localStorage.getItem('theme') as Theme | null
-    const prefersTheme = 
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    
+    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark)
+    setDark(shouldBeDark)
+
+    if (shouldBeDark) {
+      document.documentElement.classList.add('dark')
+    }
   }, [])
 
   useEffect(() => {
