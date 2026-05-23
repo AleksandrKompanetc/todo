@@ -3,7 +3,7 @@ import TodoForm from './components/TodoForm'
 import ThemeToggle from './components/ThemeToggle'
 import Filters from './components/Filters'
 import TodoList from './components/TodoList'
-import type { Todo, Filter, Theme } from './types'
+import type { Filter, Theme } from './types'
 import TodoStats from './components/TodoStats'
 
 interface Todo {
@@ -78,6 +78,7 @@ export default function App() {
   })
 
   const activeCount = todos.filter(todo => !todo.completed).length
+  const completedCount = todos.length - activeCount
 
   return (
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
