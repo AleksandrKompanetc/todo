@@ -81,8 +81,8 @@ export default function App() {
   const completedCount = todos.length - activeCount
 
   const toggleTheme = () => {
-    const newIsDark = !isDark
-    setIsDark(newIsDark)
+    const newIsDark = !dark
+    setDark(newIsDark)
 
     if (newIsDark) {
       document.documentElement.classList.add('dark')
