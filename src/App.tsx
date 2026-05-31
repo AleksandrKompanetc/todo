@@ -78,7 +78,7 @@ export default function App() {
   })
 
   const activeCount = todos.filter(todo => !todo.completed).length
-  const completedCount = todos.length - activeCount
+  // const completedCount = todos.length - activeCount
 
   const toggleTheme = () => {
     const newIsDark = !dark
@@ -97,7 +97,7 @@ export default function App() {
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
       <div className='max-w-xl mx-auto'>
         <h1 className='text-4xl font-bold text-center mb-8 text-gray-800'>Todo App</h1>
-        <ThemeToggle isDark={dark} onToggle={() => setDark(!dark)} />
+        <ThemeToggle isDark={dark} onToggle={toggleTheme} />
 
         <TodoForm addTodo={addTodo} />
         <Filters currentFilter={filter} onFilterChange={setFilter} />

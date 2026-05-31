@@ -5,30 +5,34 @@ interface TodoFormProps {
   addTodo: (text: string) => void
 }
 
-export default function TodoForm({addTodo}: TodoFormProps) {
+export default function TodoForm({ addTodo }: TodoFormProps) {
   const [inputValue, setInputValue] = useState('')
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault()
-  if (!inputValue.trim()) return
-  addTodo(inputValue.trim())
-  setInputValue('')
-}
+    e.preventDefault()
+    if (!inputValue.trim()) return
+    addTodo(inputValue.trim())
+    setInputValue('')
+  }
 
   return (
     <form
       onSubmit={handleSubmit}
-      className=""
+      className="mb-8 flex gap-2"
     >
-      <input 
-        type="text" 
+      <input
+        type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
+        placeholder='Add a new todo'
+        className='flex px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-blue-500 text-lg placeholder:text-gray-400'
       />
       <button
-        className=''
+        type='submit'
+        className='bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium flex items-center gap-2 transition-all active:scale-95'
       >
         <Plus />
+        Add
       </button>
     </form>
   )
@@ -82,11 +86,11 @@ export default function TodoForm({addTodo}: TodoFormProps) {
 //       onSubmit={handleSubmit}
 //       className='mb-8 flex gap-2'
 //     >
-//       <input 
+//       <input
 //         type="text"
 //         value={inputValue}
 //         onChange={(e) => setInputValue(e.target.value)}
-//         placeholder='Add a new todo' 
+//         placeholder='Add a new todo'
 //         className='flex px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-blue-500 text-lg placeholder:text-gray-400'
 //       />
 //       <button
