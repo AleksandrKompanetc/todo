@@ -20,7 +20,7 @@ export default function App() {
 
     const savedTheme = localStorage.getItem('theme') as Theme | null
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    
+
     const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark)
     setDark(shouldBeDark)
 
@@ -61,18 +61,20 @@ export default function App() {
 
   const editTodo = (id: number, newText: string) => {
     if (!newText.trim()) return
-    setTodos(prev => 
+    setTodos(prev =>
       prev.map(todo =>
         todo.id === id ? { ...todo, text: newText.trim() } : todo
       )
     )
   }
 
-  const filteredTodos = todos.filter(todo => {
-    if (filter === 'active') return !todo.completed
-    if (filter === 'completed') return todo.completed
-    return true
-  })
+  const filteredTodos = todos
+    .filter(todo => {
+      const matchesSearch = todo.text.toLowerCase().includes(searchQuery.toLowerCase())
+      if (filter === 'active') return !todo.completed && matchesSearch
+      if (filter === 'completed') return todo.completed && matchesSearch
+      return matchesSearch
+    })
 
   const activeCount = todos.filter(todo => !todo.completed).length
   // const completedCount = todos.length - activeCount
@@ -99,11 +101,11 @@ export default function App() {
         <TodoForm addTodo={addTodo} />
 
         <div className='mt-4'>
-          <input 
+          <input
             type="text"
             placeholder='Search todos...'
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)} 
+            onChange={(e) => setSearchQuery(e.target.value)}
             className='w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500'
           />
         </div>
@@ -120,7 +122,7 @@ export default function App() {
             activeCount={activeCount}
           />
         )}
-       </div>
+      </div>
     </div>
   )
 }
