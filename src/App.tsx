@@ -122,6 +122,12 @@ export default function App() {
             activeCount={activeCount}
           />
         )}
+
+        {searchQuery && (
+          <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-2">
+            Найдено: {filteredTodos.length} задач
+          </p>
+        )}
       </div>
     </div>
   )
