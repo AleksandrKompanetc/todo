@@ -3,22 +3,15 @@ import TodoForm from './components/TodoForm'
 import ThemeToggle from './components/ThemeToggle'
 import Filters from './components/Filters'
 import TodoList from './components/TodoList'
+import type { Todo, Filter, Theme } from './types'
 import TodoStats from './components/TodoStats'
-import type { Filter, Theme } from './types'
-
-interface Todo {
-  id: number
-  text: string
-  completed: boolean
-}
 
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
   const [filter, setFilter] = useState<Filter>('all')
-  const [searchQuery, setSearchQuery] = useState('')   // ← новое состояние
+  const [searchQuery, setSearchQuery] = useState('')
   const [dark, setDark] = useState(false)
 
-  // ... (useEffect для загрузки из localStorage остаётся без изменений)
   useEffect(() => {
     const savedTodos = localStorage.getItem('todos')
     if (savedTodos) {
@@ -46,9 +39,12 @@ export default function App() {
     if (!text.trim()) return
     setTodos(prev => [
       ...prev,
-      { id: Date.now(), text: text.trim(), completed: false }
+      {
+        id: Date.now(),
+        text: text.trim(),
+        completed: false
+      }
     ])
-    setSearchQuery('') // очищаем поиск после добавления
   }
 
   const toggleTodo = (id: number) => {
@@ -72,17 +68,14 @@ export default function App() {
     )
   }
 
-  // ← Обновлённая логика фильтрации
-  const filteredTodos = todos
-    .filter(todo => {
-      const matchesSearch = todo.text.toLowerCase().includes(searchQuery.toLowerCase())
-      
-      if (filter === 'active') return !todo.completed && matchesSearch
-      if (filter === 'completed') return todo.completed && matchesSearch
-      return matchesSearch
-    })
+  const filteredTodos = todos.filter(todo => {
+    if (filter === 'active') return !todo.completed
+    if (filter === 'completed') return todo.completed
+    return true
+  })
 
   const activeCount = todos.filter(todo => !todo.completed).length
+  // const completedCount = todos.length - activeCount
 
   const toggleTheme = () => {
     const newIsDark = !dark
@@ -98,49 +91,25 @@ export default function App() {
   }
 
   return (
-    <div className='min-h-screen bg-gray-100 dark:bg-gray-950 py-8 px-4 transition-colors'>
+    <div className='min-h-screen bg-gray-100 py-8 px-4'>
       <div className='max-w-xl mx-auto'>
-        <h1 className='text-4xl font-bold text-center mb-8 text-gray-800 dark:text-white'>
-          Todo App
-        </h1>
-
+        <h1 className='text-4xl font-bold text-center mb-8 text-gray-800'>Todo App</h1>
         <ThemeToggle isDark={dark} onToggle={toggleTheme} />
 
         <TodoForm addTodo={addTodo} />
-
-        {/* Поле поиска */}
-        <div className="mt-4">
-          <input
-            type="text"
-            placeholder="Поиск задач..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 
-                       bg-white dark:bg-gray-900 text-gray-900 dark:text-white
-                       focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
         <Filters currentFilter={filter} onFilterChange={setFilter} />
-
         <TodoList
           todos={filteredTodos}
           toggleTodo={toggleTodo}
           deleteTodo={deleteTodo}
           editTodo={editTodo}
         />
-
         {todos.length > 0 && (
-          <TodoStats activeCount={activeCount} />
+          <TodoStats
+            activeCount={activeCount}
+          />
         )}
-
-        {/* Показываем сколько задач найдено */}
-        {searchQuery && (
-          <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-2">
-            Найдено: {filteredTodos.length} задач
-          </p>
-        )}
-      </div>
+       </div>
     </div>
   )
 }
