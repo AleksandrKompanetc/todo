@@ -45,6 +45,7 @@ export default function App() {
         completed: false
       }
     ])
+    setSearchQuery('')
   }
 
   const toggleTodo = (id: number) => {
