@@ -100,8 +100,7 @@ export default function App() {
         <ThemeToggle isDark={dark} onToggle={toggleTheme} />
 
         <TodoForm addTodo={addTodo} />
-
-        <div className='mt-4'>
+        <div className='mt-4 relative'>
           <input
             type="text"
             placeholder='Search todos...'
@@ -109,6 +108,15 @@ export default function App() {
             onChange={(e) => setSearchQuery(e.target.value)}
             className='w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500'
           />
+
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className='absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+            >
+              X
+            </button>
+          )}
         </div>
 
         <Filters currentFilter={filter} onFilterChange={setFilter} />
