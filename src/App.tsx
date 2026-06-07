@@ -11,6 +11,7 @@ export default function App() {
   const [filter, setFilter] = useState<Filter>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [dark, setDark] = useState(false)
+  const [todoToDelete, setTodoToDelete] = useState<number | null>(null)
 
   useEffect(() => {
     const savedTodos = localStorage.getItem('todos')
@@ -69,6 +70,10 @@ export default function App() {
     )
   }
 
+  const requestDelete = (id: number) => {
+    setTodoToDelete(id)
+  }
+
   const filteredTodos = todos
     .filter(todo => {
       const matchesSearch = todo.text.toLowerCase().includes(searchQuery.toLowerCase())
@@ -123,7 +128,7 @@ export default function App() {
         <TodoList
           todos={filteredTodos}
           toggleTodo={toggleTodo}
-          deleteTodo={deleteTodo}
+          deleteTodo={requestDelete}
           editTodo={editTodo}
         />
         {todos.length > 0 && (
