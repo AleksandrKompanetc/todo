@@ -57,9 +57,9 @@ export default function App() {
     )
   }
 
-  const deleteTodo = (id: number) => {
-    setTodos(prev => prev.filter(todo => todo.id !== id))
-  }
+  // const deleteTodo = (id: number) => {
+  //   setTodos(prev => prev.filter(todo => todo.id !== id))
+  // }
 
   const editTodo = (id: number, newText: string) => {
     if (!newText.trim()) return
@@ -141,6 +141,23 @@ export default function App() {
           <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-2">
             Найдено: {filteredTodos.length} задач
           </p>
+        )}
+
+        {todoToDelete !== null && (
+          <div className=''>
+            <div className=''>
+              <h3 className=''>Delete task?</h3>
+              <p></p>
+              <div>
+                <button>
+
+                </button>
+                <button>
+                  
+                </button>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </div>
