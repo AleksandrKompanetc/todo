@@ -74,6 +74,13 @@ export default function App() {
     setTodoToDelete(id)
   }
 
+  const confirmDelete = () => {
+    if (todoToDelete !== null) {
+      setTodos(prev => prev.filter(todo => todo.id !== todoToDelete))
+      setTodoToDelete(null)
+    }
+  }
+
   const cancelDelete = () => {
     setTodoToDelete(null)
   }
@@ -160,7 +167,7 @@ export default function App() {
                   Cancel
                 </button>
                 <button
-                  onClick={}
+                  onClick={confirmDelete}
                   className=''
                 >
                   Delete
