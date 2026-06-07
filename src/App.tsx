@@ -74,6 +74,10 @@ export default function App() {
     setTodoToDelete(id)
   }
 
+  const cancelDelete = () => {
+    setTodoToDelete(null)
+  }
+
   const filteredTodos = todos
     .filter(todo => {
       const matchesSearch = todo.text.toLowerCase().includes(searchQuery.toLowerCase())
@@ -147,13 +151,19 @@ export default function App() {
           <div className=''>
             <div className=''>
               <h3 className=''>Delete task?</h3>
-              <p></p>
-              <div>
-                <button>
-
+              <p>Are you sure you want to delete this task?</p>
+              <div className='flex gap-3'>
+                <button
+                  onClick={cancelDelete}
+                  className=''
+                >
+                  Cancel
                 </button>
-                <button>
-                  
+                <button
+                  onClick={}
+                  className=''
+                >
+                  Delete
                 </button>
               </div>
             </div>
