@@ -3,8 +3,9 @@ import TodoForm from './components/TodoForm'
 import ThemeToggle from './components/ThemeToggle'
 import Filters from './components/Filters'
 import TodoList from './components/TodoList'
-import type { Todo, Filter, Theme } from './types'
 import TodoStats from './components/TodoStats'
+import type { Todo, Filter, Theme } from './types'
+
 
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
