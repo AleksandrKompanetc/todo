@@ -155,20 +155,20 @@ export default function App() {
         )}
 
         {todoToDelete !== null && (
-          <div className=''>
-            <div className=''>
-              <h3 className=''>Delete task?</h3>
+          <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+            <div className='bg-white dark:bg-gray-800 rounded-2xl p-6 max-w-sm w-full mx-4 shadow-xl'>
+              <h3 className='text-xl font-semibold mb-2 dark:text-white'>Delete task?</h3>
               <p>Are you sure you want to delete this task?</p>
               <div className='flex gap-3'>
                 <button
                   onClick={cancelDelete}
-                  className=''
+                  className='flex-1 py-3 px-4 bg-gray-200 dark:bg-gray-700 rounded-xl font-medium hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors'
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmDelete}
-                  className=''
+                  className='flex-1 py-3 px-4 bg-red-600 text-white rounded-xl font-medium hover:bg-red-600 transition-colors'
                 >
                   Delete
                 </button>
