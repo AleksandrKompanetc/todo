@@ -18,7 +18,7 @@ export default function TodoForm({ addTodo }: TodoFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-8 flex gap-2"
+      className="mb-2 flex gap-2"
     >
       <input
         type="text"
