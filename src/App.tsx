@@ -71,8 +71,6 @@ export default function App() {
     )
   }
 
-  const completedCount = todos.length - activeCount
-
   const requestDelete = (id: number) => {
     setTodoToDelete(id)
   }
@@ -148,7 +146,6 @@ export default function App() {
         {todos.length > 0 && (
           <TodoStats
             activeCount={activeCount}
-            completedCount={completedCount}
           />
         )}
 
