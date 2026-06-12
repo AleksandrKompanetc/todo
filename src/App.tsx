@@ -123,7 +123,7 @@ export default function App() {
             placeholder='Search todos...'
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className='w-full px-4 py-3 my-5 rounded-xl border border-gray-300 bg-white text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:border-blue-500 placeholder:text-gray-400'
+            className='w-full px-4 py-3 my-5 rounded-xl border border-gray-300 bg-white dark:text-white focus:outline-none focus:ring-2 focus:border-blue-500 placeholder:text-gray-400'
           />
 
           {searchQuery && (
