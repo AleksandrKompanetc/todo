@@ -1,17 +1,15 @@
 import { useState, useEffect } from 'react'
 import TodoForm from './components/TodoForm'
-import ThemeToggle from './components/ThemeToggle'
 import Filters from './components/Filters'
 import TodoList from './components/TodoList'
 import TodoStats from './components/TodoStats'
-import type { Todo, Filter, Theme } from './types'
+import type { Todo, Filter } from './types'
 
 
 export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
   const [filter, setFilter] = useState<Filter>('all')
   const [searchQuery, setSearchQuery] = useState('')
-  const [dark, setDark] = useState(false)
   const [todoToDelete, setTodoToDelete] = useState<number | null>(null)
 
   useEffect(() => {
