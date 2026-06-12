@@ -20,17 +20,6 @@ export default function App() {
       setTodos(JSON.parse(savedTodos))
     }
 
-    const savedTheme = localStorage.getItem('theme') as Theme | null
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-
-    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark)
-    setDark(shouldBeDark)
-
-    if (shouldBeDark) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
   }, [])
 
   useEffect(() => {
@@ -97,24 +86,10 @@ export default function App() {
   const activeCount = todos.filter(todo => !todo.completed).length
   // const completedCount = todos.length - activeCount
 
-  const toggleTheme = () => {
-    const newIsDark = !dark
-    setDark(newIsDark)
-
-    if (newIsDark) {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
-    }
-  }
-
   return (
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
       <div className='max-w-xl mx-auto'>
         <h1 className='text-4xl font-bold text-center mb-8 text-gray-800'>Todo App</h1>
-        <ThemeToggle isDark={dark} onToggle={toggleTheme} />
 
         <TodoForm addTodo={addTodo} />
         <div className='mt-2 relative'>
