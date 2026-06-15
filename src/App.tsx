@@ -75,6 +75,19 @@ export default function App() {
     setTodoToDelete(null)
   }
 
+  const toggleTheme = () => {
+    const newIsDark = !dark
+    setDark(newIsDark)
+
+    if (newIsDark) {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('theme', 'light')
+    }
+  }
+
   const filteredTodos = todos
     .filter(todo => {
       const matchesSearch = todo.text.toLowerCase().includes(searchQuery.toLowerCase())
