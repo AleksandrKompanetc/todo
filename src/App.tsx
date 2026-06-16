@@ -3,6 +3,7 @@ import TodoForm from './components/TodoForm'
 import Filters from './components/Filters'
 import TodoList from './components/TodoList'
 import TodoStats from './components/TodoStats'
+import ThemeToggle from './components/ThemeToggle'
 import type { Todo, Filter, Theme } from './types'
 
 
