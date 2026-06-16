@@ -126,7 +126,7 @@ export default function App() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className='w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 
-                       bg-white dark:bg-gray-900 text-gray-900 dark:text-white 
+                       bg-white text-gray-900 focus:border-blue-200
                        focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10'
           />
 
