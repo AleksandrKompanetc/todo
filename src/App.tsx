@@ -162,7 +162,7 @@ export default function App() {
                 className="px-5 py-2 text-sm font-medium text-red-600 hover:text-red-700 
                            dark:text-red-400 dark:hover:text-red-300 transition-colors"
               >
-                Очистить выполненные ({completedCount})
+                Clear completed ({completedCount})
               </button>
             )}
           </div>
