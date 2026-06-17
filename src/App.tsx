@@ -100,6 +100,12 @@ export default function App() {
     }
   }
 
+  const clearCompleted = () => {
+    if (confirm('Are you sure you want to clear all completed tasks?')) {
+      setTodos(prev => prev.filter(todo => !todo.completed))
+    }
+  }
+
   const filteredTodos = todos
     .filter(todo => {
       const matchesSearch = todo.text.toLowerCase().includes(searchQuery.toLowerCase())
