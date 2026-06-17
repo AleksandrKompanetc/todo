@@ -115,7 +115,7 @@ export default function App() {
     })
 
   const activeCount = todos.filter(todo => !todo.completed).length
-  // const completedCount = todos.length - activeCount
+  const completedCount = todos.length - activeCount
 
   return (
     <div className='min-h-screen bg-gray-100 py-8 px-4'>
@@ -151,10 +151,21 @@ export default function App() {
           deleteTodo={requestDelete}
           editTodo={editTodo}
         />
+
         {todos.length > 0 && (
-          <TodoStats
-            activeCount={activeCount}
-          />
+          <div className="flex justify-between items-center mt-6">
+            <TodoStats activeCount={activeCount} />
+
+            {completedCount > 0 && (
+              <button
+                onClick={clearCompleted}
+                className="px-5 py-2 text-sm font-medium text-red-600 hover:text-red-700 
+                           dark:text-red-400 dark:hover:text-red-300 transition-colors"
+              >
+                Очистить выполненные ({completedCount})
+              </button>
+            )}
+          </div>
         )}
 
         {searchQuery && (
