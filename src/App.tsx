@@ -119,7 +119,7 @@ export default function App() {
         <ThemeToggle isDark={dark} onToggle={toggleTheme} />
 
         <TodoForm addTodo={addTodo} />
-        <div className='mt-2 relative'>
+        <div className='my-4 relative'>
           <input
             type="text"
             placeholder='Search todos...'
@@ -127,7 +127,7 @@ export default function App() {
             onChange={(e) => setSearchQuery(e.target.value)}
             className='w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 
                        bg-white text-gray-900 focus:border-blue-200
-                       focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10'
+                       focus:outline-none focus:ring-2 focus:border-blue-500 pr-10'
           />
 
           {searchQuery && (
