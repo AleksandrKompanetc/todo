@@ -25,7 +25,7 @@ export default function TodoForm({ addTodo }: TodoFormProps) {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         placeholder='Add a new todo'
-        className='flex px-4 py-3 rounded-xl border border-gray-300 focus:outline-none text-gray-900 focus:border-blue-500 text-lg placeholder:text-gray-400'
+        className='w-full flex px-4 py-3 rounded-xl border border-gray-300 focus:outline-none text-gray-900 focus:border-blue-500 text-lg placeholder:text-gray-400'
       />
       <button
         type='submit'
