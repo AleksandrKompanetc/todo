@@ -87,19 +87,6 @@ export default function App() {
     setTodoToDelete(null)
   }
 
-  const toggleTheme = () => {
-    const newIsDark = !dark
-    setDark(newIsDark)
-
-    if (newIsDark) {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
-    }
-  }
-
   const clearCompleted = () => {
     if (confirm('Are you sure you want to clear all completed tasks?')) {
       setTodos(prev => prev.filter(todo => !todo.completed))
