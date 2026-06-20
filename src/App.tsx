@@ -3,7 +3,6 @@ import TodoForm from './components/TodoForm'
 import Filters from './components/Filters'
 import TodoList from './components/TodoList'
 import TodoStats from './components/TodoStats'
-import ThemeToggle from './components/ThemeToggle'
 import type { Todo, Filter, Theme } from './types'
 
 
@@ -11,25 +10,12 @@ export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
   const [filter, setFilter] = useState<Filter>('all')
   const [searchQuery, setSearchQuery] = useState('')
-  const [dark, setDark] = useState(false)
   const [todoToDelete, setTodoToDelete] = useState<number | null>(null)
 
   useEffect(() => {
     const savedTodos = localStorage.getItem('todos')
     if (savedTodos) {
       setTodos(JSON.parse(savedTodos))
-    }
-
-    const savedTheme = localStorage.getItem('theme') as Theme | null
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-
-    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark)
-    setDark(shouldBeDark)
-
-    if (shouldBeDark) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
     }
 
   }, [])
