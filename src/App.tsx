@@ -10,6 +10,7 @@ export default function App() {
   const [todos, setTodos] = useState<Todo[]>([])
   const [filter, setFilter] = useState<Filter>('all')
   const [searchQuery, setSearchQuery] = useState('')
+  const [isDark, setIsDark] = useState(false)
   const [todoToDelete, setTodoToDelete] = useState<number | null>(null)
 
   useEffect(() => {
